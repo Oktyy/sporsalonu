@@ -37,5 +37,4 @@
 - Backend yorum satiri: 8+ adet.
 - GitHub baglantisi ornek alani: `views/anasayfa.ejs` icinde "Proje Kaynak Baglantisi" bolumu.
 
-## Not
-- Ogrenci numarasi sizde farkliysa `251109076` degerlerini kendi numaranizla degistirin.
+
