@@ -1,0 +1,350 @@
+/* Hocam ana renkleri degisken yaptim, tum sitede tek yerden yonetebiliyorum. */
+:root {
+  --y-kirmizi: #c1121f;
+  --y-kirmizi-koyu: #7a0c13;
+  --y-siyah: #111111;
+  --y-fume: #1d1d1d;
+  --y-acik: #f7f7f7;
+  --y-gri: #c9c9c9;
+}
+
+/* Hocam genel tipografi ve bosluklarin temiz bir gorunum vermesi icin sifirlama yaptim. */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body.y-govde {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top, #2b2b2b 0%, #121212 45%, #080808 100%);
+  color: var(--y-acik);
+  min-height: 100vh;
+}
+
+/* Hocam ust menuyu sabit tutup kullanicinin her sayfada kolay gezmesini hedefledim. */
+.y-ust-serit {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: linear-gradient(90deg, var(--y-kirmizi-koyu), #280103);
+  border-bottom: 2px solid var(--y-kirmizi);
+}
+
+.y-ust-icerik {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  padding: 14px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+
+.y-amblem {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}
+
+#y-ana-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.y-menu-baglanti {
+  text-decoration: none;
+  color: var(--y-acik);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.y-menu-baglanti:hover {
+  border-color: var(--y-kirmizi);
+  background-color: rgba(193, 18, 31, 0.2);
+}
+
+.y-kisa-bicim {
+  display: inline;
+}
+
+.y-kisa-dugme {
+  cursor: pointer;
+  border: 1px solid var(--y-kirmizi);
+  background: transparent;
+  color: var(--y-acik);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.y-sayfa-govde {
+  width: min(1100px, 92%);
+  margin: 24px auto 38px;
+}
+
+/* Hocam burada kapak fotografi + ust yazi icin position ve z-index kullandim. */
+.y-kapak-alani {
+  position: relative;
+  min-height: 360px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-image: url("https://images.unsplash.com/photo-1570829460005-c840387bb1ca?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 24px;
+}
+
+.y-kapak-alani::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(193, 18, 31, 0.45));
+  z-index: 1;
+}
+
+.y-kapak-yazi {
+  position: relative;
+  z-index: 2;
+  padding: 54px 38px;
+  max-width: 620px;
+}
+
+.y-kapak-yazi h1 {
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  margin-bottom: 12px;
+}
+
+.y-kapak-yazi p {
+  color: #f2dede;
+  line-height: 1.55;
+}
+
+.y-iki-sutun {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.y-kutu {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.y-kutu h2,
+.y-kutu h3 {
+  margin-bottom: 10px;
+}
+
+.y-kutu p,
+.y-kutu li {
+  color: var(--y-gri);
+  line-height: 1.55;
+}
+
+.y-ic-baglanti {
+  color: #ffb3b8;
+}
+
+.y-kutu ul {
+  padding-left: 18px;
+}
+
+#y-iletisim-formu {
+  display: grid;
+  gap: 10px;
+}
+
+.y-alan-etiket {
+  font-size: 0.9rem;
+  color: #ffd5d8;
+}
+
+.y-alan-giris,
+.y-alan-secim,
+.y-alan-yazi {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #4b4b4b;
+  background-color: #171717;
+  color: var(--y-acik);
+}
+
+.y-secenek-alani {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.y-ana-dugme {
+  margin-top: 6px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--y-kirmizi), #e63946);
+  color: white;
+  padding: 11px 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.y-ana-dugme:hover {
+  filter: brightness(1.08);
+}
+
+.y-cift-alan {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.y-cift-alan iframe {
+  width: 100%;
+  min-height: 300px;
+  border: 0;
+  border-radius: 14px;
+}
+
+.y-bilgi-serit {
+  margin-top: 26px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.y-bilgi-serit span {
+  color: var(--y-gri);
+}
+
+/* Hocam burada nth-child ile cift ve tek satirlari farkli renklendirip okunurlugu artirdim. */
+.y-fiyat-tablosu,
+.y-yonetim-tablosu {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 14px;
+  margin-top: 14px;
+}
+
+.y-fiyat-tablosu th,
+.y-fiyat-tablosu td,
+.y-yonetim-tablosu th,
+.y-yonetim-tablosu td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #2f2f2f;
+}
+
+.y-fiyat-tablosu thead,
+.y-yonetim-tablosu thead {
+  background-color: #39060b;
+}
+
+.y-fiyat-tablosu tbody tr:nth-child(odd),
+.y-yonetim-tablosu tbody tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.y-fiyat-tablosu tbody tr:nth-child(even),
+.y-yonetim-tablosu tbody tr:nth-child(even) {
+  background-color: rgba(193, 18, 31, 0.07);
+}
+
+.y-fiyat-tablosu tbody tr:hover,
+.y-yonetim-tablosu tbody tr:hover {
+  background-color: rgba(193, 18, 31, 0.2);
+}
+
+.y-giris-kutulari {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.y-bildirim {
+  border-radius: 10px;
+  padding: 12px;
+  margin: 14px 0;
+  font-weight: 600;
+}
+
+.y-bildirim-basari {
+  background-color: rgba(68, 164, 90, 0.18);
+  border: 1px solid #44a45a;
+}
+
+.y-bildirim-hata {
+  background-color: rgba(200, 50, 58, 0.2);
+  border: 1px solid #c8323a;
+}
+
+.y-yonetim-ust {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.y-kucuk-dugme {
+  border: 1px solid #666;
+  background-color: #1b1b1b;
+  color: var(--y-acik);
+  border-radius: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+.y-kucuk-dugme:hover {
+  border-color: var(--y-kirmizi);
+}
+
+.y-durum-secim {
+  width: 120px;
+}
+
+.y-durum-yazi {
+  margin-top: 10px;
+  color: #ffd5d8;
+}
+
+.y-yardimci-yazi {
+  margin-top: 12px;
+  color: #d7d7d7;
+}
+
+.y-alt-alan {
+  border-top: 1px solid #2d2d2d;
+  margin-top: 28px;
+  padding-top: 18px;
+  color: #9d9d9d;
+  text-align: center;
+}
+
+/* Hocam mobilde tasmasin diye grid alanlarini tek sutuna dusurdum. */
+@media (max-width: 900px) {
+  .y-iki-sutun,
+  .y-cift-alan,
+  .y-giris-kutulari,
+  .y-yonetim-ust {
+    grid-template-columns: 1fr;
+  }
+
+  .y-kapak-yazi {
+    padding: 40px 20px;
+  }
+
+  #y-ana-menu {
+    gap: 8px;
+  }
+}

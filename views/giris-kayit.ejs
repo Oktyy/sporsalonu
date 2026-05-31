@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giris ve Kayit - Spor Salonu</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body class="y-govde">
+    <header class="y-ust-serit">
+      <div class="y-ust-icerik">
+        <div class="y-amblem">Spor Salonu Uye Yonetim</div>
+        <nav id="y-ana-menu">
+          <a class="y-menu-baglanti" href="/">Anasayfa</a>
+          <a class="y-menu-baglanti" href="/paketler">Paketler</a>
+          <a class="y-menu-baglanti" href="/giris-kayit">Giris / Kayit</a>
+          <a class="y-menu-baglanti" href="/yonetim">Yonetim</a>
+          <% if (oturum) { %>
+            <span class="y-menu-baglanti"><%= oturum.ad_soyad %></span>
+            <form class="y-kisa-bicim" method="post" action="/cikis-yap">
+              <button class="y-kisa-dugme" type="submit">Cikis Yap</button>
+            </form>
+          <% } %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="y-sayfa-govde">
+      <% if (bildirim) { %>
+        <div class="y-bildirim <%= bildirim.tur === 'basari' ? 'y-bildirim-basari' : 'y-bildirim-hata' %>">
+          <%= bildirim.metin %>
+        </div>
+      <% } %>
+
+      <section class="y-giris-kutulari">
+        <article class="y-kutu">
+          <h2>Yeni Uye Kaydi</h2>
+          <form id="y-kayit-formu" method="post" action="/kayit-ol">
+            <label class="y-alan-etiket" for="y-kayit-adsoyad">Ad Soyad</label>
+            <input class="y-alan-giris" id="y-kayit-adsoyad" name="ad_soyad" type="text" required />
+
+            <label class="y-alan-etiket" for="y-kayit-eposta">Eposta</label>
+            <input class="y-alan-giris" id="y-kayit-eposta" name="eposta" type="email" required />
+
+            <label class="y-alan-etiket" for="y-kayit-sifre">Sifre</label>
+            <input class="y-alan-giris" id="y-kayit-sifre" name="sifre" type="password" required />
+
+            <button class="y-ana-dugme" type="submit">Kayit Ol</button>
+          </form>
+        </article>
+
+        <article class="y-kutu">
+          <h2>Uye Girisi</h2>
+          <form id="y-giris-formu" method="post" action="/giris-yap">
+            <label class="y-alan-etiket" for="y-giris-eposta">Eposta</label>
+            <input class="y-alan-giris" id="y-giris-eposta" name="eposta" type="email" required />
+
+            <label class="y-alan-etiket" for="y-giris-sifre">Sifre</label>
+            <input class="y-alan-giris" id="y-giris-sifre" name="sifre" type="password" required />
+
+            <button class="y-ana-dugme" type="submit">Giris Yap</button>
+          </form>
+          <p class="y-yardimci-yazi">
+            Varsayilan yonetici hesabi: <strong>yonetim@spor.local</strong>
+          </p>
+        </article>
+      </section>
+
+      <footer class="y-alt-alan">
+        Spor Salonu Uye Yonetim Sistemi - Kullanici Kayit ve Giris Sayfasi
+        <br />
+        Yiğit Yusuf Krasu
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paketler - Spor Salonu</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="y-govde">
+    <header class="y-ust-serit">
+      <div class="y-ust-icerik">
+        <div class="y-amblem">Spor Salonu Uye Yonetim</div>
+        <nav id="y-ana-menu">
+          <a class="y-menu-baglanti" href="/">Anasayfa</a>
+          <a class="y-menu-baglanti" href="/paketler">Paketler</a>
+          <a class="y-menu-baglanti" href="/giris-kayit">Giris / Kayit</a>
+          <a class="y-menu-baglanti" href="/yonetim">Yonetim</a>
+          <% if (oturum) { %>
+            <span class="y-menu-baglanti"><%= oturum.ad_soyad %></span>
+            <form class="y-kisa-bicim" method="post" action="/cikis-yap">
+              <button class="y-kisa-dugme" type="submit">Cikis Yap</button>
+            </form>
+          <% } %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="y-sayfa-govde">
+      <% if (bildirim) { %>
+        <div class="y-bildirim <%= bildirim.tur === 'basari' ? 'y-bildirim-basari' : 'y-bildirim-hata' %>">
+          <%= bildirim.metin %>
+        </div>
+      <% } %>
+
+      <section class="y-kutu">
+        <h1>Paket ve Fiyat Listesi</h1>
+        <p>
+          Asagidaki tablo sistemde aktif olan paketleri gosterir. Tabloda satirlar
+          <strong>nth-child</strong> kuralina gore cift/tek renklenmektedir.
+        </p>
+
+        <table class="y-fiyat-tablosu">
+          <thead>
+            <tr>
+              <th>Paket ID</th>
+              <th>Paket Adi</th>
+              <th>Sure (Ay)</th>
+              <th>Aylik Ucret (TL)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% paketler.forEach((paket) => { %>
+              <tr>
+                <td><%= paket.paket_id %></td>
+                <td><%= paket.paket_adi %></td>
+                <td><%= paket.sure_ay %></td>
+                <td><%= Number(paket.aylik_ucret).toFixed(2) %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="y-bilgi-serit">
+        <span><i class="fa-solid fa-phone"></i> +90 212 000 00 00</span>
+        <span><i class="fa-solid fa-envelope"></i> bilgi@sporsalonu.com</span>
+        <span><i class="fa-solid fa-location-dot"></i> Istanbul / Turkiye</span>
+      </section>
+
+      <footer class="y-alt-alan">
+        Spor Salonu Uye Yonetim Sistemi - Paket Bilgilendirme Sayfasi
+        <br />
+        Yiğit Yusuf Krasu
+      </footer>
+    </main>
+  </body>
+</html>

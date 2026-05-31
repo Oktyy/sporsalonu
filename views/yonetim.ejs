@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yonetim Paneli - Spor Salonu</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body class="y-govde">
+    <header class="y-ust-serit">
+      <div class="y-ust-icerik">
+        <div class="y-amblem">Spor Salonu Uye Yonetim</div>
+        <nav id="y-ana-menu">
+          <a class="y-menu-baglanti" href="/">Anasayfa</a>
+          <a class="y-menu-baglanti" href="/paketler">Paketler</a>
+          <a class="y-menu-baglanti" href="/giris-kayit">Giris / Kayit</a>
+          <a class="y-menu-baglanti" href="/yonetim">Yonetim</a>
+          <span class="y-menu-baglanti"><%= oturum.ad_soyad %></span>
+          <form class="y-kisa-bicim" method="post" action="/cikis-yap">
+            <button class="y-kisa-dugme" type="submit">Cikis Yap</button>
+          </form>
+        </nav>
+      </div>
+    </header>
+
+    <main class="y-sayfa-govde">
+      <% if (bildirim) { %>
+        <div class="y-bildirim <%= bildirim.tur === 'basari' ? 'y-bildirim-basari' : 'y-bildirim-hata' %>">
+          <%= bildirim.metin %>
+        </div>
+      <% } %>
+
+      <section class="y-yonetim-ust">
+        <article class="y-kutu">
+          <h2>Yeni Abonelik Ekle</h2>
+          <form id="y-abonelik-ekle-formu">
+            <label class="y-alan-etiket" for="y-uye-secimi">Uye Secimi</label>
+            <select class="y-alan-secim" id="y-uye-secimi" name="uye_id" required>
+              <% uyeler.forEach((uye) => { %>
+                <option value="<%= uye.uye_id %>"><%= uye.ad_soyad %> - <%= uye.eposta %></option>
+              <% }) %>
+            </select>
+
+            <label class="y-alan-etiket" for="y-paket-secimi">Paket Secimi</label>
+            <select class="y-alan-secim" id="y-paket-secimi" name="paket_id" required>
+              <% paketler.forEach((paket) => { %>
+                <option value="<%= paket.paket_id %>">
+                  <%= paket.paket_adi %> - <%= Number(paket.aylik_ucret).toFixed(2) %> TL
+                </option>
+              <% }) %>
+            </select>
+
+            <label class="y-alan-etiket" for="y-baslangic-tarih">Baslangic Tarihi</label>
+            <input class="y-alan-giris" id="y-baslangic-tarih" name="baslangic_tarihi" type="date" required />
+
+            <label class="y-alan-etiket" for="y-durum-secimi">Durum</label>
+            <select class="y-alan-secim" id="y-durum-secimi" name="durum">
+              <option value="aktif">Aktif</option>
+              <option value="pasif">Pasif</option>
+            </select>
+
+            <button class="y-ana-dugme" type="submit">Abonelik Ekle</button>
+          </form>
+          <p id="y-durum-yazisi" class="y-durum-yazi"></p>
+        </article>
+
+        <article class="y-kutu">
+          <h2>Panel Notu</h2>
+          <p>
+            Bu panelde abonelik listesi, ekleme, durum guncelleme ve silme islemleri
+            <strong>/api/251109076/abonelikler</strong> REST endpointleri uzerinden yapilir.
+          </p>
+          <p class="y-yardimci-yazi">
+            Giris yapan her kullanici bu paneli gorebilir.
+          </p>
+        </article>
+      </section>
+
+      <section class="y-kutu">
+        <h2>Abonelik Kayitlari</h2>
+        <table class="y-yonetim-tablosu">
+          <thead>
+            <tr>
+              <th>Abonelik ID</th>
+              <th>Uye</th>
+              <th>Paket</th>
+              <th>Baslangic</th>
+              <th>Durum</th>
+              <th>Paket Guncelle</th>
+              <th>Sil</th>
+            </tr>
+          </thead>
+          <tbody id="y-abonelik-govde">
+            <% abonelikler.forEach((satir) => { %>
+              <tr data-abonelik-id="<%= satir.abonelik_id %>">
+                <td><%= satir.abonelik_id %></td>
+                <td><%= satir.ad_soyad %></td>
+                <td>
+                  <%= satir.paket_adi %> -
+                  <%= Number(satir.aylik_ucret).toFixed(2) %> TL
+                </td>
+                <td><%= satir.baslangic_tarihi %></td>
+                <td>
+                  <select class="y-alan-secim y-durum-secim">
+                    <option value="aktif" <%= satir.durum === 'aktif' ? 'selected' : '' %>>Aktif</option>
+                    <option value="pasif" <%= satir.durum === 'pasif' ? 'selected' : '' %>>Pasif</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="y-alan-secim y-paket-secim">
+                    <% paketler.forEach((paket) => { %>
+                      <option value="<%= paket.paket_id %>" <%= paket.paket_id === satir.paket_id ? 'selected' : '' %>>
+                        <%= paket.paket_adi %>
+                      </option>
+                    <% }) %>
+                  </select>
+                  <button class="y-kucuk-dugme y-guncelle-dugme" type="button">Guncelle</button>
+                </td>
+                <td>
+                  <button class="y-kucuk-dugme y-sil-dugme" type="button">Sil</button>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </section>
+
+      <footer class="y-alt-alan">
+        Spor Salonu Uye Yonetim Sistemi - Admin Paneli
+        <br />
+        Yiğit Yusuf Krasu
+      </footer>
+    </main>
+
+    <script src="/js/yonetim.js"></script>
+  </body>
+</html>

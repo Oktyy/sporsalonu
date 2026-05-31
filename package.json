@@ -1,0 +1,26 @@
+{
+  "name": "spor-salonu-uye-yonetim",
+  "version": "1.0.0",
+  "description": "Web Programlama dersi proje odevi: Spor Salonu Uye Yonetim Sistemi",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "keywords": [
+    "express",
+    "mysql",
+    "session",
+    "spor-salonu"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mysql2": "^3.11.0"
+  }
+}

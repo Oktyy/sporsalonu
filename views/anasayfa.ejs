@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spor Salonu Uye Yonetim Sistemi</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="y-govde">
+    <header class="y-ust-serit">
+      <div class="y-ust-icerik">
+        <div class="y-amblem">Spor Salonu Uye Yonetim</div>
+        <nav id="y-ana-menu">
+          <a class="y-menu-baglanti" href="/">Anasayfa</a>
+          <a class="y-menu-baglanti" href="/paketler">Paketler</a>
+          <a class="y-menu-baglanti" href="/giris-kayit">Giris / Kayit</a>
+          <a class="y-menu-baglanti" href="/yonetim">Yonetim</a>
+          <% if (oturum) { %>
+            <span class="y-menu-baglanti"><%= oturum.ad_soyad %></span>
+            <form class="y-kisa-bicim" method="post" action="/cikis-yap">
+              <button class="y-kisa-dugme" type="submit">Cikis Yap</button>
+            </form>
+          <% } %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="y-sayfa-govde">
+      <% if (bildirim) { %>
+        <div class="y-bildirim <%= bildirim.tur === 'basari' ? 'y-bildirim-basari' : 'y-bildirim-hata' %>">
+          <%= bildirim.metin %>
+        </div>
+      <% } %>
+
+      <section class="y-kapak-alani">
+        <div class="y-kapak-yazi">
+          <h1>Sporu duzenli hale getir, uyeligini kolay yonet.</h1>
+          <p>
+            Kirmizi ve siyah temali sistemimizde kayit ol, paketleri incele, hesabina giris yap ve
+            abonelik bilgilerini tek merkezden takip et.
+          </p>
+        </div>
+      </section>
+
+      <section class="y-iki-sutun">
+        <article class="y-kutu">
+          <h2>Neden Biz?</h2>
+          <ul>
+            <li>Uyeligi anlik takip etme ve hizli islem.</li>
+            <li>Kisisel hedefe gore baslangic, performans ve profesyonel paketler.</li>
+            <li>Kullanici girisi ile guvenli yonetim paneli.</li>
+          </ul>
+        </article>
+
+        <article class="y-kutu">
+          <h2>Iletisim Formu</h2>
+          <form id="y-iletisim-formu" method="post" action="/iletisim-gonder">
+            <label class="y-alan-etiket" for="y-adsoyad">Ad Soyad</label>
+            <input class="y-alan-giris" id="y-adsoyad" name="ad_soyad" type="text" required />
+
+            <label class="y-alan-etiket" for="y-telefon">Telefon</label>
+            <input class="y-alan-giris" id="y-telefon" name="telefon" type="tel" required />
+
+            <span class="y-alan-etiket">Ilgi Alani (Radio)</span>
+            <div class="y-secenek-alani">
+              <label><input type="radio" name="ilgi_alani" value="fitness" checked /> Fitness</label>
+              <label><input type="radio" name="ilgi_alani" value="kardiyo" /> Kardiyo</label>
+              <label><input type="radio" name="ilgi_alani" value="grup_dersi" /> Grup Dersi</label>
+            </div>
+
+            <label class="y-alan-etiket" for="y-gorusme-saati">Uygun Gorusme Saati (Select)</label>
+            <select class="y-alan-secim" id="y-gorusme-saati" name="gorusme_saati">
+              <option value="09:00-12:00">09:00 - 12:00</option>
+              <option value="12:00-15:00">12:00 - 15:00</option>
+              <option value="15:00-19:00">15:00 - 19:00</option>
+            </select>
+
+            <label class="y-alan-etiket" for="y-mesaj">Mesaj</label>
+            <textarea class="y-alan-yazi" id="y-mesaj" name="mesaj" rows="4"></textarea>
+
+            <button class="y-ana-dugme" type="submit">Mesaj Gonder</button>
+          </form>
+        </article>
+      </section>
+
+      <section class="y-cift-alan">
+        <article class="y-kutu">
+          <h3>Antrenman Videosu</h3>
+          <iframe
+            src="https://www.youtube.com/embed/UItWltVZZmE"
+            title="Antrenman videosu"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </article>
+        <article class="y-kutu">
+          <h3>Konumumuz</h3>
+          <iframe
+            src="https://www.google.com/maps?q=Istanbul+Ataturk+Stadyumu&output=embed"
+            title="Harita"
+            loading="lazy"
+          ></iframe>
+        </article>
+      </section>
+
+      <section class="y-kutu">
+        <h3>Proje Kaynak Baglantisi</h3>
+        <p>
+          Teslimde istenen GitHub kaynagi icin ornek baglanti:
+          <a class="y-ic-baglanti" href="https://github.com/kullaniciadi/spor-salonu-uye-yonetim" target="_blank" rel="noreferrer">
+            github.com/kullaniciadi/spor-salonu-uye-yonetim
+          </a>
+        </p>
+      </section>
+
+      <section class="y-bilgi-serit">
+        <span><i class="fa-solid fa-phone"></i> +90 212 000 00 00</span>
+        <span><i class="fa-solid fa-envelope"></i> bilgi@sporsalonu.com</span>
+        <span><i class="fa-solid fa-location-dot"></i> Istanbul / Turkiye</span>
+      </section>
+
+      <footer class="y-alt-alan">
+        Spor Salonu Uye Yonetim Sistemi - Web Programlama Proje Calismasi
+        <br />
+        Yiğit Yusuf Krasu
+      </footer>
+    </main>
+  </body>
+</html>
