@@ -13,5 +13,4 @@ Bu proje Web Programlama dersi icin Node.js (Express) + MySQL kullanilarak gelis
 - Eposta: `yonetim@spor.local`
 - Sifre: `.env` dosyasindaki `ADMIN_SIFRE` degeri
 
-## Not
-- Ogrenci numaraniz farkliysa `251109076` on eklerini kendi numaranizla degistirin.
+
